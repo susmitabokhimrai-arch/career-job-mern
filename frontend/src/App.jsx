@@ -1,16 +1,46 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Login from './components/auth/Login'
+import Signup from './components/auth/Signup'
+import Home from './components/Home'
 
-import './App.css'
+const appRouter = createBrowserRouter([
+  {
+    path:'/',
+    element:<Home/>
+  },
+  {
+    path:'/login',
+    element:<Login/>
+  },
+  {
+    path:'/signup',
+    element:<Signup/>
+  },
+  //{
+   // path:'/browse',
+   // element:<Browse/>
+ // },
+  /*{
+    path:'/jobs',
+    element:<Jobs/>
+  },
+  {
+    path:'/description/:id',
+    element:<JobDescription />
+  },
+  {
+    path:'/profile',
+    element:<Profile/>
+  },**/
+]
+)
 
 function App() {
-  
-
   return (
     <>
-    <h1 className="text-green-500 text-4xl font-bold">
-      Tailwind is working!
-    </h1>
-      </>
+    <RouterProvider router ={appRouter}/>
+      
+    </>
   )
 }
-
 export default App
