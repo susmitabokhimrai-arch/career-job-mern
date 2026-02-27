@@ -27,7 +27,7 @@ app.use("/api/v1/user", userRoute);
 // Connect to DB and start server
 connectDB();
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running at port ${PORT}`);
 });
