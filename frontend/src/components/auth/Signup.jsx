@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../shared/Navbar'
 import { Label } from '@radix-ui/react-label'
 import { Input } from '../ui/input'
@@ -7,16 +7,38 @@ import { Button } from '../ui/button'
 import { Link } from 'react-router-dom'
 
 const Signup = () => {
+    const[input, setInput] = useState({
+        fullname:"",
+        email:"",
+        phoneNumber:"",
+        password:"",
+        role:"",
+        file:""
+    });
+    const changeEventHandler = (e) =>{
+        setInput({...input, [e.target.name]: e.target.value});
+    }
+
+    const changeFileHandler = (e) =>{
+        setInput ({...input, file: e.target.files?.[0]});
+    }
+    const submitHandler = (e) =>{
+        e.preventDefault();
+        console.log(input);
+    }
     return (
         <div>
             <Navbar />
             <div className='flex items-center justify-center max-w-7xl mx-auto'>
-                <form action="" className='w-1/2 border border-gray-200 rounded-md p-4 my-10'>
+                <form onSubmit={submitHandler} className='w-1/2 border border-gray-200 rounded-md p-4 my-10'>
                     <h1 className='font-bold text-xl mb-5'>Create Account 🚀</h1>
                     <div className='my-2'>
                         <Label>Full Name</Label>
                         <Input
                             type='text'
+                            value={input.fullname}
+                            onChange={changeEventHandler}
+                            name='fullname'
                             placeholder="Enter your Name"
                         />
                     </div>
@@ -24,6 +46,9 @@ const Signup = () => {
                         <Label>Email</Label>
                         <Input
                             type='email'
+                            value={input.email}
+                            onChange={changeEventHandler}
+                            name='email'
                             placeholder="Enter your email"
                         />
                     </div>
@@ -31,6 +56,9 @@ const Signup = () => {
                         <Label>Phone Number</Label>
                         <Input
                             type='number'
+                            value={input.phoneNumber}
+                            onChange={changeEventHandler}
+                            name='phoneNumber'
                             placeholder="Enter your Phone number"
                         />
                     </div>
@@ -38,6 +66,9 @@ const Signup = () => {
                         <Label>Password</Label>
                         <Input
                             type='Password'
+                            value={input.password}
+                            onChange={changeEventHandler}
+                            name='password'
                             placeholder="Enter your Password"
                         />
                     </div>
@@ -48,6 +79,8 @@ const Signup = () => {
                                 type="radio"
                                 name='role'
                                 value='student'
+                                checked={input.role === 'student'}
+                                onChange={changeEventHandler}
                                 className='cursor-pointer'
                                 />
                                 <Label htmlFor="r1">Student</Label>
@@ -57,6 +90,8 @@ const Signup = () => {
                                 type='radio'
                                 name='role'
                                 value='recruiter'
+                                checked={input.role === 'recruiter'}
+                                onChange={changeEventHandler}
                                 className='cursor-pointer'
                                 />
                                 <Label htmlFor="r2">Recruiter</Label>
@@ -68,7 +103,8 @@ const Signup = () => {
                             <Input
                             accept="image/*"
                             type="file"
-                            classname="cursor-pointer"
+                            onChange={changeFileHandler}
+                            className="cursor-pointer"
                             />
                         </div>
                     </div>
